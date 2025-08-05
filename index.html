@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kraven the Hunter - The Ultimate Pursuit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --jungle: #2e4c2f;
+            --jungle-light: #3f613e;
+            --bone: #f3efea;
+            --blood: #a5141a;
+            --gold: #c1a857;
+            --fur: #7b6435;
+            --shadow: #1a2421;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: var(--jungle);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%232e4c2f"/><path d="M0 0 L100 100 M100 0 L0 100" stroke="%233f613e" stroke-width="1"/></svg>');
+            color: var(--shadow);
+            font-family: 'Old Standard TT', serif;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.5)),
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 800 800"><ellipse cx="400" cy="400" rx="390" ry="390" fill="none" stroke="%23c1a857" stroke-width="2" stroke-dasharray="10,10"/></svg>');
+            color: var(--gold);
+            padding: 3rem 0;
+            text-align: center;
+            border-bottom: 8px solid var(--blood);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><path d="M40,180 Q100,60 160,180" fill="none" stroke="%23c1a85788" stroke-width="2"/></svg>');
+            opacity: 0.25;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        nav {
+            background: linear-gradient(to right, var(--fur), var(--jungle-light));
+            padding: 1rem 0;
+            border-top: 3px solid var(--gold);
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            margin: 0 1rem;
+            position: relative;
+        }
+        nav ul li::after {
+            content: "•";
+            color: var(--gold);
+            position: absolute;
+            right: -1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        nav ul li:last-child::after {
+            display: none;
+        }
+        nav ul li a {
+            color: var(--bone);
+            text-decoration: none;
+            font-family: 'Cinzel Decorative', cursive;
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+            position: relative;
+        }
+        nav ul li a:hover {
+            color: var(--gold);
+            background-color: rgba(0,0,0,0.3);
+        }
+        nav ul li a::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold);
+            visibility: hidden;
+            transform: scaleX(0);
+            transition: all 0.3s ease-in-out;
+        }
+        nav ul li a:hover::before {
+            visibility: visible;
+            transform: scaleX(1);
+        }
+        section {
+            margin: 3rem 0;
+            padding: 2.5rem;
+            background-color: var(--bone);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 1px solid #e4ddc8;
+            position: relative;
+            overflow: hidden;
+        }
+        section::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="48" ry="48" fill="none" stroke="%23e4ddc855" stroke-width="1"/></svg>');
+            pointer-events: none;
+        }
+        h1, h2, h3 {
+            color: var(--blood);
+            margin-bottom: 1.5rem;
+            font-family: 'Cinzel Decorative', cursive;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+            letter-spacing: 1px;
+        }
+        h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+        h2 {
+            font-size: 2.5rem;
+            border-bottom: 3px double var(--gold);
+            padding-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        h2::before, h2::after {
+            content: "⏣";
+            color: var(--gold);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        h2::before {
+            left: -40px;
+        }
+        h2::after {
+            right: -40px;
+        }
+        h3 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--fur);
+            padding-left: 1rem;
+        }
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .episode-list {
+            margin-left: 2rem;
+            position: relative;
+        }
+        .episode-list h3 {
+            border-left: none;
+            padding-left: 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+        .episode-list h3::before {
+            content: "⤞";
+            position: absolute;
+            left: 0;
+            color: var(--fur);
+        }
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .character-card {
+            background-color: var(--jungle-light);
+            padding: 1.5rem;
+            border-radius: 5px;
+            border-left: 6px solid var(--blood);
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            color: var(--bone);
+        }
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+        }
+        .character-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--blood), var(--gold));
+        }
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: linear-gradient(to bottom, var(--gold), var(--blood), var(--gold));
+            top: 0; bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 30px; height: 30px;
+            right: -20px;
+            background-color: var(--bone);
+            border: 5px solid var(--blood);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 0 3px var(--gold);
+        }
+        .left { left: 0; }
+        .right { left: 50%; }
+        .left::before {
+            content: " ";
+            height: 0; position: absolute;
+            top: 22px; width: 0; z-index: 1;
+            right: 30px;
+            border: medium solid var(--gold);
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--gold);
+        }
+        .right::before {
+            content: " ";
+            height: 0; position: absolute;
+            top: 22px; width: 0; z-index: 1;
+            left: 30px;
+            border: medium solid var(--gold);
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--gold) transparent transparent;
+        }
+        .right::after { left: -20px; }
+        .timeline-content {
+            padding: 25px;
+            background-color: var(--bone);
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid var(--jungle-light);
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+        }
+        .timeline-content::before {
+            content: "";
+            position: absolute;
+            top: 10px; right: 10px; bottom: 10px; left: 10px;
+            border: 1px solid rgba(165, 20, 26, 0.1);
+            border-radius: 3px;
+            pointer-events: none;
+        }
+        .quote {
+            font-style: italic;
+            color: var(--fur);
+            border-left: 3px solid var(--gold);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            font-size: 1.2rem;
+        }
+        .quote::before {
+            content: "“";
+            position: absolute;
+            left: -1rem;
+            top: -1rem;
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+        .quote::after {
+            content: "”";
+            position: absolute;
+            right: -1rem;
+            bottom: -2rem;
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+        .badge {
+            display: inline-block;
+            background-color: var(--blood);
+            color: var(--bone);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        @media (max-width: 768px) {
+            .timeline::after { left: 31px; }
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .timeline-item::after { left: 15px; }
+            .left::before, .right::before {
+                left: 60px;
+                border: medium solid var(--gold);
+                border-width: 10px 10px 10px 0;
+                border-color: transparent var(--gold) transparent transparent;
+            }
+            .left::after, .right::after { left: 15px; }
+            .right { left: 0%; }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            nav ul li::after { display: none; }
+            h1 { font-size: 2.5rem;}
+            h2 { font-size: 2rem; }
+            h2::before, h2::after { display: none; }
+        }
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: var(--fur);}
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--gold);
+            border-radius: 6px;
+            border: 3px solid var(--fur);
+        }
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                box-shadow: 0 0 10px 5px rgba(193,168,87,0.5);
+            }
+            20%, 24%, 55% {
+                box-shadow: 0 0 12px 8px rgba(193,168,87,0.8), 0 0 20px 10px rgba(193,168,87,0.4);
+            }
+        }
+        .candle-light {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            width: 40px; height: 60px;
+            background: linear-gradient(to bottom, var(--gold), var(--fur));
+            border-radius: 3px;
+            z-index: 1000;
+            animation: flicker 3s infinite;
+            cursor: pointer;
+        }
+        .candle-light::before {
+            content: "";
+            position: absolute;
+            top: -10px; left: 15px;
+            width: 10px; height: 20px;
+            background: linear-gradient(to bottom, #fff, var(--gold));
+            border-radius: 50% 50% 20% 20%;
+            filter: blur(3px);
+        }
+    </style>
+</head>
+<body>
+    <div class="candle-light" title="Click to extinguish"></div>
+    <header>
+        <div class="container">
+            <h1>Kraven the Hunter</h1>
+            <p style="font-family: 'Cinzel Decorative', cursive; letter-spacing: 3px; font-size: 1.5rem;">
+                THE ULTIMATE PURSUIT
+            </p>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#overview">The Legend</a></li>
+            <li><a href="#characters">Allies & Foes</a></li>
+            <li><a href="#episodes">Iconic Hunts</a></li>
+            <li><a href="#timeline">Timeline</a></li>
+            <li><a href="#production">Behind the Myth</a></li>
+            <li><a href="#reception">Legacy</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <section id="overview">
+            <h2>The Legend of Sergei Kravinoff</h2>
+            <div class="quote">
+                "The greatest victory is to conquer oneself. But the thrill of the hunt—ah, that is my true passion."
+            </div>
+            <p>Kraven the Hunter, born Sergei Kravinoff, is one of the most formidable adversaries in the Marvel universe. Driven by pride and a relentless desire to prove himself as the world’s greatest hunter, he tracks prey both beast and human—most famously, Spider-Man.</p>
+            <p>Kraven’s legend is built on his code of honor, mastery of survival, and an obsession that leads him to ever greater challenges. He relies on cunning, physical prowess, and ancient elixirs to push the limits of human ability. In his mind, the hunt is sacred and only the worthiest prey deserve pursuit.</p>
+            <h3>Origins of the Hunter</h3>
+            <p>Sergei’s journey began in Russia, forged by hardship and the wild. His family’s legacy and personal tragedy shaped his path, as he sought meaning and glory far beyond ordinary men. His adventures span continents, but his rivalry with Spider-Man defines his myth.</p>
+            <div class="badge">Marvel Villain</div>
+            <div class="badge">Master Hunter</div>
+            <div class="badge">Russian Nobility</div>
+        </section>
+        <section id="characters">
+            <h2>Allies & Foes</h2>
+            <p>Those who walk beside Kraven—or stand in his path—are as legendary as the hunter himself.</p>
+            <div class="character-grid">
+                <div class="character-card">
+                    <h3>Kraven (Sergei Kravinoff)</h3>
+                    <p>The hunter obsessed with triumph, honor, and the thrill of the challenge. His strength, senses, and willpower are unmatched, enhanced by mystical potions.</p>
+                    <div class="badge">Hunter</div>
+                    <div class="badge">Tactician</div>
+                </div>
+                <div class="character-card">
+                    <h3>Spider-Man</h3>
+                    <p>The ultimate quarry. Kraven sees Spider-Man as the one prey worthy of true pursuit—the embodiment of agility, cunning, and heroism.</p>
+                    <div class="badge">Prey</div>
+                    <div class="badge">Nemesis</div>
+                </div>
+                <div class="character-card">
+                    <h3>Alyosha Kravinoff</h3>
+                    <p>Kraven’s estranged son, who inherited both skill and the curse of obsession. Their relationship is fraught with rivalry and tragedy.</p>
+                    <div class="badge">Son</div>
+                    <div class="badge">Rival Hunter</div>
+                </div>
+                <div class="character-card">
+                    <h3>Calypso</h3>
+                    <p>A mystic and Kraven’s lover, Calypso aids him with voodoo magic and potions, often blurring the line between reality and nightmare.</p>
+                    <div class="badge">Ally</div>
+                    <div class="badge">Sorceress</div>
+                </div>
+                <div class="character-card">
+                    <h3>Chameleon (Dmitri Smerdyakov)</h3>
+                    <p>Kraven’s half-brother and master of disguise. Their bond is complex, marked by mutual respect and betrayal.</p>
+                    <div class="badge">Half-Brother</div>
+                    <div class="badge">Master of Disguise</div>
+                </div>
+                <div class="character-card">
+                    <h3>The Sinister Six</h3>
+                    <p>At times, Kraven joins forces with other villains, seeking greater triumphs or vengeance against Spider-Man.</p>
+                    <div class="badge">Villain Team</div>
+                    <div class="badge">Occasional Ally</div>
+                </div>
+            </div>
+        </section>
+        <section id="episodes">
+            <h2>Iconic Hunts</h2>
+            <p>Kraven’s saga is marked by legendary encounters—each a test of skill, wit, and resolve.</p>
+            <div class="episode-list">
+                <h3>Kraven’s Last Hunt</h3>
+                <p>The most famous of his stories. Kraven defeats Spider-Man, buries him alive, and dons the hero’s costume, seeking to prove his superiority once and for all.</p>
+                <h3>The Gauntlet</h3>
+                <p>Kraven returns, resurrected and more dangerous than ever, pushing Spider-Man and his allies to their limits.</p>
+                <h3>Hunters for Hire</h3>
+                <p>Kraven assembles a team—including his son Alyosha—for a deadly game involving superheroes and supervillains alike.</p>
+                <h3>Unleashed in the Savage Land</h3>
+                <p>Kraven seeks the ultimate prey in the wilds of the Savage Land, facing dinosaurs, Ka-Zar, and untold dangers.</p>
+                <h3>Chameleon Conspiracy</h3>
+                <p>Family bonds and betrayal come to a head as Kraven and Chameleon’s schemes entwine, threatening Spider-Man and all of New York.</p>
+            </div>
+        </section>
+        <section id="timeline">
+            <h2>Timeline of the Hunt</h2>
+            <p>Follow the path of Kraven’s greatest battles, from Russia to New York and beyond.</p>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Early Life in Russia</h3>
+                        <p>Sergei Kravinoff is born into nobility, trained in survival and combat. The loss of his family fortune sets him on a path of adventure and obsession.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>First Encounter with Spider-Man</h3>
+                        <p>Kraven arrives in New York, seeking the thrill of hunting the city’s greatest hero. Their rivalry begins, each encounter raising the stakes.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Kraven’s Last Hunt</h3>
+                        <p>He conquers Spider-Man, then realizes victory brings emptiness. The story ends in tragedy, cementing Kraven’s legend.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Resurrection and Return</h3>
+                        <p>Kraven is revived through dark magic, facing new foes and old ghosts. His methods become even more ruthless.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>The Savage Land</h3>
+                        <p>Seeking the ultimate challenge, Kraven hunts in the prehistoric jungles, battling monsters and his own demons.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Legacy of the Hunter</h3>
+                        <p>Kraven’s myth endures, inspiring new hunters, villains, and stories throughout the Marvel universe.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="production">
+            <h2>Behind the Myth</h2>
+            <p>How comic creators and artists shaped Kraven’s enduring story.</p>
+            <h3>The Vision</h3>
+            <p>From Stan Lee and Steve Ditko’s original creation to modern reinterpretations, Kraven’s character has evolved—reflecting themes of obsession, honor, and tragedy.</p>
+            <h3>Art and Design</h3>
+            <p>Kraven’s iconic look—lion’s mane vest, tribal tattoos, and hunter’s arsenal—has inspired generations of artists and cosplayers.</p>
+            <h3>Media Adaptations</h3>
+            <p>Kraven has appeared in cartoons, video games, and will soon star in his own live-action film, expanding his legend beyond comics.</p>
+            <div class="quote">
+                "Kraven is more than a villain—he’s the embodiment of the eternal hunter, always seeking the next challenge."
+            </div>
+        </section>
+        <section id="reception">
+            <h2>Legacy</h2>
+            <p>Kraven’s impact on popular culture, comics, and fans worldwide.</p>
+            <h3>Critical Acclaim</h3>
+            <p>“Kraven’s Last Hunt” is universally celebrated as one of the greatest Spider-Man stories, praised for its psychological depth and emotional power.</p>
+            <h3>Fan Response</h3>
+            <p>Kraven remains a fan favorite—his code, look, and iconic stories have inspired countless tributes, fan art, and cosplay.</p>
+            <h3>Awards & Honors</h3>
+            <p>His stories have received Eisner nominations and are regularly cited among Marvel’s best arcs.</p>
+            <div class="badge">Comic Icon</div>
+            <div class="badge">Fan Favorite</div>
+            <div class="badge">Award Winner</div>
+        </section>
+    </div>
+    <script>
+        const candle = document.querySelector('.candle-light');
+        candle.addEventListener('click', function() {
+            this.style.animation = 'none';
+            this.style.opacity = '0.5';
+            this.title = 'Click to relight';
+            setTimeout(() => {
+                this.style.animation = 'flicker 3s infinite';
+                this.style.opacity = '1';
+                this.title = 'Click to extinguish';
+            }, 5000);
+        });
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            section.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 8px 20px rgba(0,0,0,0.3)';
+                this.style.transform = 'translateY(-5px)';
+            });
+            section.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        function checkTimeline() {
+            const triggerBottom = window.innerHeight / 5 * 4;
+            timelineItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < triggerBottom) {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }
+            });
+        }
+        timelineItems.forEach(item => {
+            if (item.classList.contains('left')) {
+                item.style.transform = 'translateX(-50px)';
+            } else {
+                item.style.transform = 'translateX(50px)';
+            }
+            item.style.opacity = '0';
+            item.style.transition = 'all 0.8s ease';
+        });
+        window.addEventListener('scroll', checkTimeline);
+        window.addEventListener('load', checkTimeline);
+    </script>
+</body>
+</html>
